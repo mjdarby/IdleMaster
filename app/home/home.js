@@ -9,6 +9,16 @@ angular.module('myApp.home', ['ngRoute'])
   });
 }])
 
-.controller('HomeCtrl', [function() {
-
+.controller('HomeCtrl', ['$scope', '$interval', function($scope, $interval) {
+  // Variables
+  $scope.fans = 0;
+  $scope.money = 0;
+  $scope.moneyPerClick = 1;
+  $scope.gameLoop = function() {
+    $scope.fans += 1;
+  };
+  $scope.moneyClick = function() {
+    $scope.money += $scope.moneyPerClick;
+  };
+  $interval($scope.gameLoop, 30);
 }]);
