@@ -1,7 +1,28 @@
-<p>
-  <button type="button" class="btn btn-default btn-sm" ng-click="moneyClick()">Gimmie cash!</button>
-  <button type="button" class="btn btn-default btn-sm" ng-click="spendMoney('AkibaMeet')">Akiba meet and greet!</button>
-</p>
-<p>Money: {{money}} </p>
-<p>Fans: {{fans}}</p>
-<p>Money per second: {{moneyPerSecond}}</p>
+<div class="row">
+  <div class="col-sm-1">
+  </div>
+  <div class="col-xs-6 col-sm-6">
+    <p>Money: {{money}} </p>
+    <p>Fans: {{fans}}</p>
+    <p>Money per second: {{moneyPerSecond}}</p>
+  </div>
+  <div class="col-xs-6 col-sm-3">
+    <div class="row">
+      <button type="button"
+              class="btn btn-default btn-sm"
+              ng-click="moneyClick()">Gimmie cash!</button>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row" ng-repeat="item in items">
+      <button type="button"
+              class="btn btn-default btn-sm"
+              ng-disabled="item.Cost > money"
+              ng-click="spendMoney(item.ShortName)">
+        {{item['LongName']}} <br/>Cost: {{item['Cost']}} Count: {{item['Count']}}
+      </button>
+      <div class="row">&nbsp;</div>
+    </div>
+  </div>
+  <div class="col-sm-1">
+  </div>
+</div>

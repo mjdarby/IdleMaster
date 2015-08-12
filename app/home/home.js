@@ -28,12 +28,15 @@ angular.module('myApp.home', ['ngRoute'])
       $scope.moneyToAddThisLoop -= numToAdd;
       $scope.money += numToAdd;
     }
-
-
   };
 
   // Stuff to buy
-  $scope.items = { 'AkibaMeet': {'Cost': 1, 'Fans': 10} };
+  $scope.items = {}
+  $scope.newItem = function(shortName, longName, baseCost, fans) {
+    $scope.items[shortName] = {'ShortName': shortName, 'LongName': longName, 'BaseCost': baseCost, 'Cost': baseCost, 'Count': 0, 'Fans': fans};
+  };
+  $scope.newItem('AkibaMeet', 'Akiba Meet And Greet!', 1, 1);
+  $scope.newItem('NewAlbum', 'Release a new album', 10, 15);
 
   // Player actions
   $scope.moneyClick = function() {
@@ -44,15 +47,21 @@ angular.module('myApp.home', ['ngRoute'])
     if (item in $scope.items) {
       var chosenItem = $scope.items[item];
       if ($scope.money >= chosenItem['Cost']) {
+        // Update stats
         $scope.money -= chosenItem['Cost'];
         $scope.fans += chosenItem['Fans'];
+
+        // Update item stats
+        chosenItem['Cost'] = chosenItem['BaseCost'] * (chosenItem['Count'] + 1);
+        chosenItem['Count'] += 1;
       }
     }
   };
 
   // Watchers
   $scope.$watch('fans', function(newValue, oldValue) {
-    $scope.moneyPerSecond = newValue / 2;
+    $scope.moneyPerSecond = newValue * 0.1;
+    $scope.moneyPerSecond = $scope.moneyPerSecond.toFixed(1);
   });
 
   // Start up that game!
