@@ -18,7 +18,7 @@
               class="btn btn-default btn-sm"
               ng-disabled="item.Cost > money"
               ng-click="spendMoney(item.ShortName)">
-        {{item['LongName']}} <br/>Cost: {{item['Cost']}} Count: {{item['Count']}}
+        {{item['LongName']}}<br/>{{item['CountText']}}: {{item['Count']}}<br/>Cost: {{item['Cost']}}
       </button>
       <div class="row">&nbsp;</div>
     </div>

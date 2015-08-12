@@ -32,11 +32,11 @@ angular.module('myApp.home', ['ngRoute'])
 
   // Stuff to buy
   $scope.items = {}
-  $scope.newItem = function(shortName, longName, baseCost, fans) {
-    $scope.items[shortName] = {'ShortName': shortName, 'LongName': longName, 'BaseCost': baseCost, 'Cost': baseCost, 'Count': 0, 'Fans': fans};
+  $scope.newItem = function(shortName, longName, countText, baseCost, fans) {
+    $scope.items[shortName] = {'ShortName': shortName, 'LongName': longName, 'BaseCost': baseCost, 'Cost': baseCost, 'Count': 0, 'Fans': fans, 'CountText': countText};
   };
-  $scope.newItem('AkibaMeet', 'Akiba Meet And Greet!', 1, 1);
-  $scope.newItem('NewAlbum', 'Release a new album', 10, 15);
+  $scope.newItem('AkibaMeet', 'Akiba Meet And Greet!', "Meet and greets held", 1, 1);
+  $scope.newItem('NewAlbum', 'Release a new album', "Albums released", 10, 15);
 
   // Player actions
   $scope.moneyClick = function() {
@@ -52,8 +52,8 @@ angular.module('myApp.home', ['ngRoute'])
         $scope.fans += chosenItem['Fans'];
 
         // Update item stats
-        chosenItem['Cost'] = chosenItem['BaseCost'] * (chosenItem['Count'] + 1);
         chosenItem['Count'] += 1;
+        chosenItem['Cost'] = chosenItem['BaseCost'] * (chosenItem['Count'] + 1);
       }
     }
   };
