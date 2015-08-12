@@ -18,9 +18,9 @@ describe('my app', function() {
     });
 
 
-    it('should render home when user navigates to /home', function() {
+    it('should a new game when user navigates to /home', function() {
       expect(element.all(by.css('[ng-view] p')).first().getText()).
-        toMatch(/partial for view 1/);
+        toMatch(/Money: 0 Gimmie cash!/);
     });
 
   });
