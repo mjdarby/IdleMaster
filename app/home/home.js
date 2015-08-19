@@ -20,23 +20,38 @@ angular.module('myApp.home', ['ngRoute'])
   $scope.moneyPerSecond = 0;
   $scope.moneyToAddThisLoop = 0;
 
+  // Stuff to buy
+  $scope.items = {}
+  $scope.newItem = function(shortName, longName, countText, baseCost, fans) {
+    $scope.items[shortName] = {'ShortName': shortName, 'LongName': longName, 'BaseCost': baseCost, 'Cost': baseCost, 'Count': 0, 'Fans': fans, 'CountText': countText, 'Revealed': false};
+  };
+  $scope.newItem("AkibaMeet", "Akiba Meet And Greet!", "Hands shaken", 10, 1);
+  $scope.newItem("NewAlbum", "Release a new album", "Records sold", 80, 15);
+  $scope.newItem("NewCM", "Shoot a commercial", "Products endorsed", 200, 20);
+  $scope.newItem("PerformConcert", "Perform a concert", "Glowsticks lit", 300, 1000);
+
+  // Game loop functions
+  $scope.revealItem = function() {
+    for (var itemName in $scope.items) {
+      var item = $scope.items[itemName];
+      if (!item.Revealed && $scope.money > item.Cost / 2) {
+        item.Revealed = true;
+      }
+    }
+  };
+
   // Game loop
   $scope.gameLoop = function() {
+
     $scope.moneyToAddThisLoop += $scope.moneyPerSecond / $scope.frameRate;
     if ($scope.moneyToAddThisLoop > 0) {
       var numToAdd = Math.floor($scope.moneyToAddThisLoop);
       $scope.moneyToAddThisLoop -= numToAdd;
       $scope.money += numToAdd;
     }
-  };
 
-  // Stuff to buy
-  $scope.items = {}
-  $scope.newItem = function(shortName, longName, countText, baseCost, fans) {
-    $scope.items[shortName] = {'ShortName': shortName, 'LongName': longName, 'BaseCost': baseCost, 'Cost': baseCost, 'Count': 0, 'Fans': fans, 'CountText': countText};
+    $scope.revealItem();
   };
-  $scope.newItem('AkibaMeet', 'Akiba Meet And Greet!', "Meet and greets held", 1, 1);
-  $scope.newItem('NewAlbum', 'Release a new album', "Albums released", 10, 15);
 
   // Player actions
   $scope.moneyClick = function() {

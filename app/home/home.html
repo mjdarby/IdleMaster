@@ -16,9 +16,17 @@
     <div class="row" ng-repeat="item in items">
       <button type="button"
               class="btn btn-default btn-sm"
+              ng-if="item.Revealed"
               ng-disabled="item.Cost > money"
               ng-click="spendMoney(item.ShortName)">
-        {{item['LongName']}}<br/>{{item['CountText']}}: {{item['Count']}}<br/>Cost: {{item['Cost']}}
+        {{item['LongName']}}<br/>{{item['CountText']}}: {{item['Count'] * item['Fans']}}<br/>Cost: {{item['Cost']}}
+      </button>
+      <button type="button"
+              class="btn btn-default btn-sm"
+              ng-if="!item.Revealed"
+              ng-disabled="item.Cost > money"
+              ng-click="spendMoney(item.ShortName)">
+        ???
       </button>
       <div class="row">&nbsp;</div>
     </div>
