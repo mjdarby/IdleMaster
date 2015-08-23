@@ -23,7 +23,10 @@ angular.module('myApp.home', ['ngRoute'])
   // Stuff to buy
   $scope.items = {}
   $scope.newItem = function(shortName, longName, countText, baseCost, fans) {
-    $scope.items[shortName] = {'ShortName': shortName, 'LongName': longName, 'BaseCost': baseCost, 'Cost': baseCost, 'Count': 0, 'Fans': fans, 'CountText': countText, 'Revealed': false};
+    $scope.items[shortName] = {'ShortName': shortName, 'LongName': longName,
+                               'BaseCost': baseCost, 'Cost': baseCost,
+                               'Count': 0, 'Fans': fans, 'CountText': countText,
+                               'Revealed': false};
   };
   $scope.newItem("AkibaMeet", "Akiba Meet And Greet!", "Hands shaken", 10, 1);
   $scope.newItem("NewAlbum", "Release a new album", "Records sold", 80, 15);
@@ -44,11 +47,10 @@ angular.module('myApp.home', ['ngRoute'])
   $scope.gameLoop = function() {
 
     $scope.moneyToAddThisLoop += $scope.moneyPerSecond / $scope.frameRate;
-    if ($scope.moneyToAddThisLoop > 0) {
-      var numToAdd = Math.floor($scope.moneyToAddThisLoop);
-      $scope.moneyToAddThisLoop -= numToAdd;
-      $scope.money += numToAdd;
-    }
+
+    var numToAdd = Math.floor($scope.moneyToAddThisLoop);
+    $scope.moneyToAddThisLoop -= numToAdd;
+    $scope.money += numToAdd;
 
     $scope.revealItem();
   };
@@ -68,7 +70,8 @@ angular.module('myApp.home', ['ngRoute'])
 
         // Update item stats
         chosenItem['Count'] += 1;
-        chosenItem['Cost'] = Math.floor(chosenItem['BaseCost'] * Math.pow(1.125, chosenItem['Count']));
+        chosenItem['Cost'] = Math.floor(chosenItem['BaseCost'] *
+                                        Math.pow(1.125, chosenItem['Count']));
       }
     }
   };
