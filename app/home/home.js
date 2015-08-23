@@ -68,7 +68,7 @@ angular.module('myApp.home', ['ngRoute'])
 
         // Update item stats
         chosenItem['Count'] += 1;
-        chosenItem['Cost'] = chosenItem['BaseCost'] * (chosenItem['Count'] + 1);
+        chosenItem['Cost'] = Math.floor(chosenItem['BaseCost'] * Math.pow(1.125, chosenItem['Count']));
       }
     }
   };
