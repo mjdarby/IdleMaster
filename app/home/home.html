@@ -13,6 +13,7 @@
               ng-click="moneyClick()">Gimmie cash!</button>
     </div>
     <div class="row">&nbsp;</div>
+
     <div class="row" ng-repeat="item in items">
       <button type="button"
               class="btn btn-default btn-sm"
@@ -27,6 +28,16 @@
               ng-disabled="item.Cost > money"
               ng-click="spendMoney(item.ShortName)">
         ???
+      </button>
+      <div class="row">&nbsp;</div>
+    </div>
+    <div class="row" ng-repeat="item in upgrades">
+      <button type="button"
+              class="btn btn-default btn-sm"
+              ng-if="item.Revealed"
+              ng-disabled="item.Cost > money"
+              ng-click="spendMoney(item.ShortName)">
+        {{item['LongName']}}<br/>{{item['Description']}}<br/>Cost: {{item['Cost']}}
       </button>
       <div class="row">&nbsp;</div>
     </div>
